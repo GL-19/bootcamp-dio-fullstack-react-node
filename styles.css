@@ -132,8 +132,9 @@ main {
 
 @media (max-width: 850px) {
     main {
-        justify-content: center;
+        width: 90%;
     }
+    
     .instagram-smartphones {
         display: none;
     }   
@@ -152,7 +153,10 @@ main {
     .instagram-smartphones {
         display: none;
     }   
-
+    
+    .instagram-main {
+        width: 100%;
+    }
     .main-container {
         border: solid 1px transparent;
     }
