@@ -1,0 +1,81 @@
+:root {
+    --red: #E50914;
+    --black: #141414;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--black);
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+header .logo {
+    color: var(--red);
+    font-family: 'Arial Black', Times;
+    font-size: 40px;
+    margin-left: 5px;
+}
+
+header nav a {
+    text-decoration: none;
+    margin-right: 10px;
+    color: #AAA;
+}
+
+header nav a:hover {
+    color: #ffffff;
+}
+
+/*Filme em destaque*/
+.filme-destaque {
+    font-size: 16px;
+    background-image: url('../img/capa-house-of-cards.jpg'), linear-gradient(rgba(0, 0, 0, 0.7),rgba(0,0,0,0.7)100%);
+    height: 400px;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.filme-destaque .descricao {
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+.filme-destaque .titulo {
+    margin-top: 15%;
+    font-size: 40px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.botao {
+    background-color: rgba(0,0,0,0.5);
+    border: none;
+    padding: 15px 30px;
+    margin-right: 15px;
+    font-size: 12px;
+    color: white;
+    cursor: pointer;
+    transition: 0.33s ease;
+}
+
+.botao:hover {
+    background-color: white;
+    color: black;
+}
+
+.botao i {
+    margin-right: 7.5px;
+}
