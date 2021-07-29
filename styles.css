@@ -43,6 +43,7 @@ main {
     flex-direction: column;
     width: 50%;
     min-height: 32rem;
+    margin-top: 1rem;
 }
 
 .main-container {
