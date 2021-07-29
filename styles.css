@@ -72,7 +72,6 @@ main {
     align-items: center;
     border-radius: 50%;
     overflow: hidden;
-
 }
 
 .profile-photo img {
@@ -82,9 +81,9 @@ main {
 .instagram-login {
     background-color: #0095f6;
     color: #ffffff;
+    margin-top: 1rem;
     border-radius: 4px;
     padding: 8px;
-
 }
 
 .instagram-logout {
@@ -100,6 +99,7 @@ main {
 
 .link-blue {
     color: #0095f6;
+    cursor: pointer;
 }
 
 .instagram-downloadApp {
