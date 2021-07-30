@@ -2,8 +2,11 @@ body {
     height: 95vh;
     width: 95vw;
     display: flex;
+    background-color: lightgray;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     color: blue;
+}
+canvas {
+    border: solid blue 5px;
 }
