@@ -90,4 +90,9 @@ function renderGame() {
     moveSnake();
 }
 
+function refreshPage() {
+    window.location.reload();
+} 
+
 let game = setInterval(renderGame, 100);
+
