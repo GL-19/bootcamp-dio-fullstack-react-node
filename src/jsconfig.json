@@ -15,7 +15,14 @@
             ],
             "commons:/*": [
                 "./commons/*"
+            ],
+            "resources:/*": [
+                "./resources/*"
             ]
         }
-    }
+    },
+    "exclude": [
+        "node-modules",
+        "build"
+    ]
 }
