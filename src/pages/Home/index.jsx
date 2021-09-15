@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import TextField, { Input } from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon';
 
@@ -13,7 +13,7 @@ import {
   ModalContent,
   ModalTitle,
 } from './styles';
-import { ImageCard, RestaurantCard, Modal, Map } from '../../components';
+import { ImageCard, RestaurantCard, Modal, Map, Loader } from '../../components';
 
 import logo from '../../assets/logo.svg';
 import restaurante from '../../assets/restaurante-fake.png';
@@ -62,16 +62,21 @@ export default function Home() {
               onKeyPress={handleKeyPress}
             />
           </TextField>
-          <CarouselTitle>Na sua Área</CarouselTitle>
-          <Carousel {...settings}>
-            {restaurants.map((restaurant) => (
-              <ImageCard
-                key={restaurant.place_id}
-                image={restaurant.photos ? restaurant.photos[0].getUrl() : restaurante}
-                title={restaurant.name}
-              />
-            ))}
-          </Carousel>
+          {restaurants.length > 0 ? (
+            <>
+              <CarouselTitle>Na sua Área</CarouselTitle>
+              <Carousel {...settings}>
+                {restaurants.map((restaurant) => (
+                  <ImageCard
+                    key={restaurant.place_id}
+                    image={restaurant.photos ? restaurant.photos[0].getUrl() : restaurante}
+                    title={restaurant.name}
+                  />
+                ))}
+              </Carousel>
+            </>) : ( 
+            <Loader/> 
+          )}
         </Search>
         {restaurants.map((restaurant) => (
           <RestaurantCard
@@ -82,12 +87,12 @@ export default function Home() {
       </Container>
       <Map query={query} placeId={placeId} />
       <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>
-        <ModalTitle>{selectedRestaurant?.name} </ModalTitle>
+        <ModalTitle>{selectedRestaurant && selectedRestaurant.name} </ModalTitle>
         <ModalContent>
-          {"Telefone: " + selectedRestaurant?.formatted_phone_number} 
+          {selectedRestaurant && "Telefone: " + selectedRestaurant?.formatted_phone_number} 
         </ModalContent>
         <ModalContent>
-          {"Endereço: " + selectedRestaurant?.formatted_address} 
+          {selectedRestaurant && "Endereço: " + selectedRestaurant?.formatted_address} 
         </ModalContent>
         <ModalContent>
           {selectedRestaurant?.opening_hours?.open_now ? "Aberto" : "Fechado"} 
