@@ -13,7 +13,7 @@ import {
   ModalContent,
   ModalTitle,
 } from './styles';
-import { ImageCard, RestaurantCard, Modal, Map, Loader } from '../../components';
+import { ImageCard, RestaurantCard, Modal, Map, Loader, Skeleton } from '../../components';
 
 import logo from '../../assets/logo.svg';
 import restaurante from '../../assets/restaurante-fake.png';
@@ -74,7 +74,8 @@ export default function Home() {
                   />
                 ))}
               </Carousel>
-            </>) : ( 
+            </>
+          ) : ( 
             <Loader/> 
           )}
         </Search>
@@ -87,16 +88,27 @@ export default function Home() {
       </Container>
       <Map query={query} placeId={placeId} />
       <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)}>
-        <ModalTitle>{selectedRestaurant && selectedRestaurant.name} </ModalTitle>
-        <ModalContent>
-          {selectedRestaurant && "Telefone: " + selectedRestaurant?.formatted_phone_number} 
-        </ModalContent>
-        <ModalContent>
-          {selectedRestaurant && "Endereço: " + selectedRestaurant?.formatted_address} 
-        </ModalContent>
-        <ModalContent>
-          {selectedRestaurant?.opening_hours?.open_now ? "Aberto" : "Fechado"} 
-        </ModalContent>
+        {selectedRestaurant ? (
+          <>
+            <ModalTitle>{selectedRestaurant?.name} </ModalTitle>
+            <ModalContent>
+              {"Telefone: " + selectedRestaurant?.formatted_phone_number} 
+            </ModalContent>
+            <ModalContent>
+              {"Endereço: " + selectedRestaurant?.formatted_address} 
+            </ModalContent>
+            <ModalContent>
+              {selectedRestaurant?.opening_hours?.open_now ? "Aberto" : "Fechado"} 
+            </ModalContent>
+          </>
+        ) : (
+          <>
+            <Skeleton width="10px" height="10px" />
+            <Skeleton width="10px" height="10px" />
+            <Skeleton width="10px" height="10px" />
+            <Skeleton width="10px" height="10px" />
+          </>
+        )}
       </Modal>
     </Wrapper>
   );
