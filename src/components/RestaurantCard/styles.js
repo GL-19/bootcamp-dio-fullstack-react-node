@@ -20,6 +20,7 @@ export const RestaurantImage = styled.img`
   border-radius: 5px;
   border-right: 10px;
   object-fit: cover;
+  display: ${(props) => props.imageLoaded ? "block" : "none"}
 `;
 
 export const RestaurantImageContainer = styled.div`
