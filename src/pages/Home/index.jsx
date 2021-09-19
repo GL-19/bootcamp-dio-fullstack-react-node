@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Profile } from '../../components';
 import { getRepos, getUser } from '../../services/api';
+import { ContentWrapper } from './styles';
 
 export default function Home() {
   const [searchValue, setSearchValue] = useState('');
@@ -17,7 +18,7 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <ContentWrapper>
       <h1>Pesquisa de repositórios</h1>
       <input type="text" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
       <button onClick={handleSearch} >Pesquisar</button>
@@ -36,9 +37,9 @@ export default function Home() {
           name={repo.name} 
           createDate={repo.created_at} 
           lastUpdateDate={repo.pushed_at} 
-          url={repo.url}
+          url={repo.clone_url}
         />
       )}
-    </div>
+    </ContentWrapper>
   )
 }
