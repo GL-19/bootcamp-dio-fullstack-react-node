@@ -1,24 +1,31 @@
 import React from "react";
-import { CardContainer, Info, InfoDescription } from "./styles";
+import { CardContainer, Text, Title, Icon } from "./styles";
+import starIcon from '../../assets/images/star.png'
+import forkIcon from '../../assets/images/fork.png'
 
-export default function Card({ name, createDate, lastUpdateDate, url }) {
-  const path = 'https://github.com'
+export default function Card({
+	name,
+	createDate,
+	lastUpdateDate,
+	url,
+	forks,
+	stars,
+	description,
+}) {
 	return (
 		<CardContainer>
-			<Info>
-				<InfoDescription>Nome Repositorio: </InfoDescription>{name}
-			</Info>
-			<Info>
-				<InfoDescription>Data de criação: </InfoDescription>{createDate.split("T")[0]}
-			</Info>
-			<Info>
-				<InfoDescription>Data do último commit: </InfoDescription>
-				{lastUpdateDate.split("T")[0]}
-			</Info>
-			<Info>
-				<InfoDescription>URL: </InfoDescription>
-        <a href={url} target="_blank">{url}</a>
-			</Info>
+      <Title href={url} target="_blank" rel="noreferrer" >
+        {name}
+			</Title>
+			<Text>Criado em {createDate.split("T")[0]}</Text>
+			<Text>Atualizado em {lastUpdateDate.split("T")[0]}</Text>
+			<Text>
+        <Icon src={forkIcon}/>
+        : {forks}      |       
+        <Icon src={starIcon}/>
+        : {stars} 
+      </Text>
+		{/* 	{description && <Text>{description}</Text>} */}
 		</CardContainer>
 	);
 }
