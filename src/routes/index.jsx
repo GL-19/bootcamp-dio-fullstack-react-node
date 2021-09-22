@@ -7,11 +7,14 @@ export default function Routes() {
   return (
     <BrowserRouter>
         <Switch>
-          <Route path="/" exact>
+          <Route exact path="/">
             <Home />
           </Route>
           <Route path="/search">
             <SearchResult />
+          </Route>
+          <Route path="*">
+            <h1>Página não encontrada</h1>
           </Route>
         </Switch>
     </BrowserRouter>

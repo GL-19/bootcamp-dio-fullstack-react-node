@@ -28,7 +28,7 @@ export default function Profile(props) {
 		twitter_username: twitter,
 		public_repos: repos,
 	} = props.userData;
-  
+
 	return (
 		<ProfileContainer>
 			<PhotoContainer>
@@ -39,6 +39,7 @@ export default function Profile(props) {
 				</Link>
 			</PhotoContainer>
 			<InfoContainer>
+				<Title>Informações</Title>
 				{location && (
 					<Text>
 						<Icon src={locationIcon} />
@@ -69,7 +70,6 @@ export default function Profile(props) {
 						{twitter}
 					</Text>
 				)}
-				{repos && <Text>Repos: {repos}</Text>}
 			</InfoContainer>
 		</ProfileContainer>
 	);

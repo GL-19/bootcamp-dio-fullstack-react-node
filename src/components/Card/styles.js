@@ -21,11 +21,11 @@ export const Title = styled.a`
   text-align: center;
   color: black;
   text-decoration: none;
+  margin: 5px 5px 15px 5px;
   &:hover {
     color: red;
     text-decoration: underline;
   }
-  margin: 5px;
 `;
 
 export const Text = styled.p`
@@ -34,6 +34,6 @@ export const Text = styled.p`
 `;
 
 export const Icon = styled.img`
-  width: 24px;
-  height: 24px;
+  width: 14px;
+  height: 14px;
 `;

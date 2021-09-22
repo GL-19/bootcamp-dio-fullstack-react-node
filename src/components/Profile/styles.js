@@ -2,14 +2,16 @@ import styled from "styled-components";
 
 export const ProfileContainer = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 400px;
+  align-items: flex-start;
+  min-width: 400px;
   border-radius: 10%;
   border: black solid 2px;
   margin: 25px 0;
   padding: 10px;
-  
+  @media(max-width: 600px) {
+    min-width: 0;
+    flex-direction: column;
+  }
 `;
 
 export const PhotoContainer = styled.div`
@@ -19,25 +21,29 @@ export const PhotoContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin: 10px;
+  
 `;
 
 export const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin-top: 20px;
 `;
 
 export const Title = styled.h1`
   font-family: 'Roboto Slab', 'sans-serif', serif;
   font-size: 18px;
   font-weight: bold;
-  margin: 0;
+  margin: 2px;
 `;
 
 export const Text = styled.p`
   font-family: 'Roboto Slab', 'sans-serif', serif;
   font-size: 15px;
-  margin: 0;
+  margin: 2px;
 `;
 
 export const Link = styled.a`
@@ -56,6 +62,8 @@ export const Photo = styled.img`
   width: 150px;
   height: 150px;
   border-radius: 50%;
+  border: black 1px solid;
+  margin: 2px;
 `;
 
 export const Icon = styled.img`

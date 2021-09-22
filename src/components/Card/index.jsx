@@ -22,10 +22,7 @@ export default function Card(props) {
 			<Text>Criado em {createDate.split("T")[0]}</Text>
 			<Text>Atualizado em {lastUpdateDate.split("T")[0]}</Text>
 			<Text>
-        <Icon src={forkIcon}/>
-        : {forks}      |       
-        <Icon src={starIcon}/>
-        : {stars} 
+        {stars} <Icon src={starIcon}/>   |    {forks} <Icon src={forkIcon}/>    
       </Text>
 		{/* 	{description && <Text>{description}</Text>} */}
 		</CardContainer>
