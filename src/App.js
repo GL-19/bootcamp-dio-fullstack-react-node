@@ -1,23 +1,15 @@
 import React from 'react';
-import { Home } from './pages';
-//import { GlobalStyle } from './assets/styles/GlobalStyle'
-import { createGlobalStyle } from 'styled-components';
+import Routes from './routes';
+import  GlobalStyle  from './assets/styles/GlobalStyle'
 
 function App() {
   return (
   <>
     <GlobalStyle />
-    <Home />
+    <Routes />
   </>
   );
 }
 
 export default App;
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto Slab', 'sans-serif', serif;
-  }
-`;

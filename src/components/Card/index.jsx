@@ -3,15 +3,17 @@ import { CardContainer, Text, Title, Icon } from "./styles";
 import starIcon from '../../assets/images/star.png'
 import forkIcon from '../../assets/images/fork.png'
 
-export default function Card({
-	name,
-	createDate,
-	lastUpdateDate,
-	url,
-	forks,
-	stars,
-	description,
-}) {
+export default function Card(props) {
+  const {
+    name,
+    createDate,
+    lastUpdateDate,
+    url,
+    forks,
+    stars,
+    description,
+  } = props;
+  
 	return (
 		<CardContainer>
       <Title href={url} target="_blank" rel="noreferrer" >
