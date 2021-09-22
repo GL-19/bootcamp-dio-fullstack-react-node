@@ -9,8 +9,9 @@ export const ProfileContainer = styled.div`
   margin: 25px 0;
   padding: 10px;
   @media(max-width: 600px) {
-    min-width: 0;
+    min-width: 250px;
     flex-direction: column;
+    align-items: center;
   }
 `;
 
@@ -21,7 +22,10 @@ export const PhotoContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin: 10px;
-  
+  @media(max-width: 600px) {
+    min-width: 0;
+    margin-bottom: 0;
+  }
 `;
 
 export const InfoContainer = styled.div`
@@ -31,6 +35,10 @@ export const InfoContainer = styled.div`
   align-items: center;
   padding: 10px;
   margin-top: 20px;
+  min-width: 50%;
+  @media(max-width: 600px) {
+    margin-top: 0;
+  }
 `;
 
 export const Title = styled.h1`
