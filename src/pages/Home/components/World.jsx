@@ -8,11 +8,7 @@ function World({ values }) {
 	const history = useHistory();
 
 	function renderImg({ image, description }) {
-		return (
-			<div>
-				<img src={image.url} alt={description} width="100% " />
-			</div>
-		);
+		return <img src={image.url} alt={description} width="100% " />;
 	}
 
 	function openPost(id) {

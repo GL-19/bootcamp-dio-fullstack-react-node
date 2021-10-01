@@ -29,6 +29,7 @@ function Home() {
 	}, []);
 
 	if (loading) return <div>Carregando</div>;
+
 	return (
 		<div>
 			<Row gutter={[16, 16]}>
