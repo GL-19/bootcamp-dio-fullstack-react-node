@@ -24,6 +24,7 @@ function Post() {
 		setLoading(true);
 		Promise.allSettled([Api.getNews(subject), Api.getNewsById(subject, id)])
 			.then(handleNews)
+			.then(() => console.log(news))
 			.catch(() => console.log("Pesquisa falhou"));
 	}, [id, subject, handleNews]);
 
@@ -51,6 +52,7 @@ function Post() {
 					{image?.url
 						? renderImg({ image, description })
 						: renderDescription(description)}
+					{renderDescription(description)}
 				</article>
 			</Col>
 		);
