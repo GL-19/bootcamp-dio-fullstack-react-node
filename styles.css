@@ -18,7 +18,7 @@ body {
 	width: 600px;
 	height: 600px;
 	background-color: #ffffff;
-	border: 3px solid #000000;
+	border: 1px solid #ffffff;
 	border-radius: 100%;
 }
 
@@ -27,18 +27,25 @@ body {
 	background-color: blue;
 	border-bottom-right-radius: 100%;
 }
+
 .red {
 	grid-area: red;
 	background-color: red;
 	border-top-right-radius: 100%;
 }
+
 .yellow {
 	grid-area: yellow;
 	background-color: yellow;
 	border-bottom-left-radius: 100%;
 }
+
 .green {
 	grid-area: green;
 	background-color: green;
 	border-top-left-radius: 100%;
+}
+
+.selected {
+	opacity: 0.5;
 }
