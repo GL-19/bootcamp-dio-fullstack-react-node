@@ -1,5 +1,5 @@
 import { Pool } from "pg";
-import DB_URL from "./env";
+import { DB_URL } from "./env";
 
 const connectionString = DB_URL;
 //const connectionString = process.env.DB_URL;
