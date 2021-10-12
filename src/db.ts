@@ -3,7 +3,6 @@ import DB_URL from "./env";
 
 const connectionString = DB_URL;
 //const connectionString = process.env.DB_URL;
-console.log(connectionString);
 const db = new Pool({ connectionString });
 
 export default db;
