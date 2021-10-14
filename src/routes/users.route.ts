@@ -1,9 +1,12 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { StatusCodes } from "http-status-codes";
+import jwtAuthenticationMiddleware from "../middlewares/jwt-authentication.middleware";
 import DatabaseError from "../models/errors/database.error.models";
 import userRepository from "../repositories/user.repository";
 
 const usersRoute = Router();
+
+usersRoute.use(jwtAuthenticationMiddleware);
 
 usersRoute.get("/users", async (req: Request, res: Response, next: NextFunction) => {
 	try {
