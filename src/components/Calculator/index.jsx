@@ -6,9 +6,13 @@ import { calculate } from "../../utils/parser";
 
 export default function Calculator() {
 	const [calc, setCalc] = useState("");
-	const [result, setResult] = useState("");
+	const [error, setError] = useState(false);
 
 	function handleClick(value) {
+		console.log(calc);
+		if (error) {
+			setError(false);
+		}
 		if (calc.length > 0) {
 			let previous = calc[calc.length - 1];
 			if (isNaN(value)) {
@@ -30,31 +34,42 @@ export default function Calculator() {
 	}
 
 	function handleCalculate() {
+		if (error) {
+			setError(false);
+		}
 		try {
-			let newResult = calculate(calc);
-			console.log(newResult);
-			//console.log(eval(calc));
-			setResult(newResult);
-			setCalc(newResult);
+			let result = calculate(calc);
+			if (result === "Infinity") {
+				setError(true);
+			} else {
+				result = Number(result);
+				result = parseFloat(result.toFixed(5));
+				setCalc(result);
+			}
 		} catch (error) {
-			console.log(error, "Ocorreu um erro");
+			setError(true);
 		}
 	}
 
 	function clear() {
 		setCalc("");
+		if (error) {
+			setError(false);
+		}
 	}
 
 	function deleteLast() {
+		if (error) {
+			setError(false);
+		}
 		let length = calc.length;
-		console.log(calc, typeof calc);
 		let newCalc = calc.slice(0, length - 1);
 		setCalc(newCalc);
 	}
 
 	return (
 		<Main>
-			<Display>{calc}</Display>
+			<Display>{error ? "Error" : calc}</Display>
 			<GridLayout>
 				<Button area="one" onClick={() => handleClick("1")}>
 					1
