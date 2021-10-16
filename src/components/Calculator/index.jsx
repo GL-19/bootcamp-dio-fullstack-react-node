@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button, BlueButton, RedButton } from "../Buttons";
 import Display from "../Display";
 import { GridLayout, Main } from "./styles";
+import { postFix, postFixCalculate } from "../../utils/parser";
 
 export default function Calculator() {
 	const [calc, setCalc] = useState("");
@@ -12,6 +13,9 @@ export default function Calculator() {
 	}
 
 	function calculate() {
+		console.log("calc", calc);
+		let postFixArray = postFix(calc);
+		console.log(postFixArray);
 		console.log(eval(calc));
 		setResult(eval(calc));
 		setCalc(eval(calc));
@@ -40,7 +44,7 @@ export default function Calculator() {
 				<Button area="three" onClick={() => handleClick("3")}>
 					3
 				</Button>
-				<Button area="add" onClick={() => handleClick("+")}>
+				<Button area="add" onClick={() => handleClick(" + ")}>
 					+
 				</Button>
 				<Button area="four" onClick={() => handleClick("4")}>
@@ -52,7 +56,7 @@ export default function Calculator() {
 				<Button area="six" onClick={() => handleClick("6")}>
 					6
 				</Button>
-				<Button area="sub" onClick={() => handleClick("-")}>
+				<Button area="sub" onClick={() => handleClick(" - ")}>
 					-
 				</Button>
 				<Button area="seven" onClick={() => handleClick("7")}>
@@ -64,7 +68,7 @@ export default function Calculator() {
 				<Button area="nine" onClick={() => handleClick("9")}>
 					9
 				</Button>
-				<Button area="mul" onClick={() => handleClick("*")}>
+				<Button area="mul" onClick={() => handleClick(" * ")}>
 					*
 				</Button>
 				<Button area="zero" onClick={() => handleClick("0")}>
@@ -73,7 +77,7 @@ export default function Calculator() {
 				<Button area="dot" onClick={() => handleClick(".")}>
 					.
 				</Button>
-				<Button area="div" onClick={() => handleClick("/")}>
+				<Button area="div" onClick={() => handleClick(" / ")}>
 					/
 				</Button>
 				<RedButton area="calculate" onClick={() => calculate()}>
