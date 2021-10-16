@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Button } from "../Buttons";
+import { Button, BlueButton, RedButton } from "../Buttons";
+import Display from "../Display";
 import { GridLayout, Main } from "./styles";
 
 export default function Calculator() {
@@ -28,7 +29,7 @@ export default function Calculator() {
 
 	return (
 		<Main>
-			<h1>{calc}</h1>
+			<Display>{calc}</Display>
 			<GridLayout>
 				<Button area="one" onClick={() => handleClick("1")}>
 					1
@@ -75,18 +76,15 @@ export default function Calculator() {
 				<Button area="div" onClick={() => handleClick("/")}>
 					/
 				</Button>
-				<Button area="calculate" onClick={() => calculate()}>
+				<RedButton area="calculate" onClick={() => calculate()}>
 					=
-				</Button>
-				<Button area="clear" onClick={() => clear()}>
+				</RedButton>
+				<BlueButton area="clear" onClick={() => clear()}>
 					C
-				</Button>
-				<Button area="delete" onClick={() => deleteLast()}>
+				</BlueButton>
+				<BlueButton area="delete" onClick={() => deleteLast()}>
 					Del
-				</Button>
-				<Button area="result" onClick={() => handleClick(result)}>
-					Res
-				</Button>
+				</BlueButton>
 			</GridLayout>
 		</Main>
 	);
