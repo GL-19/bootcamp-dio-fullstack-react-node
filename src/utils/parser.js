@@ -1,5 +1,6 @@
-function postFix(inputString) {
+function postFixTransformation(inputString) {
 	let input = inputString.split(" ");
+	console.log(input);
 	const precedence = {
 		"+": 1,
 		"-": 1,
@@ -35,4 +36,47 @@ function postFix(inputString) {
 	return output;
 }
 
-export { postFix };
+function postFixCalculation(input) {
+	const stack = [];
+	for (let value of input) {
+		if (!isNaN(value)) {
+			stack.push(value);
+		} else if (stack.length >= 2) {
+			let num2 = Number(stack.pop());
+			let num1 = Number(stack.pop());
+			switch (value) {
+				case "+":
+					stack.push(num1 + num2);
+					break;
+				case "-":
+					stack.push(num1 - num2);
+					break;
+				case "/":
+					stack.push(num1 / num2);
+					break;
+				case "*":
+					stack.push(num1 * num2);
+					break;
+				default:
+					console.log("Operador inválido");
+					break;
+			}
+		} else if (stack.length < 2) {
+			throw new Error("Números faltando");
+		}
+	}
+	if (stack.length > 1) {
+		throw new Error("Operadores faltando");
+	}
+	console.log(stack);
+	const result = stack[0];
+	return result;
+}
+
+function calculate(input) {
+	let postFixArray = postFixTransformation(input);
+	let result = postFixCalculation(postFixArray);
+	return String(result);
+}
+
+export { postFixTransformation, postFixCalculation, calculate };

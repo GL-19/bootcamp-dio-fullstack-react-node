@@ -2,23 +2,43 @@ import { useState, useEffect } from "react";
 import { Button, BlueButton, RedButton } from "../Buttons";
 import Display from "../Display";
 import { GridLayout, Main } from "./styles";
-import { postFix, postFixCalculate } from "../../utils/parser";
+import { calculate } from "../../utils/parser";
 
 export default function Calculator() {
 	const [calc, setCalc] = useState("");
 	const [result, setResult] = useState("");
 
 	function handleClick(value) {
-		setCalc(calc + value);
+		if (calc.length > 0) {
+			let previous = calc[calc.length - 1];
+			if (isNaN(value)) {
+				if (!isNaN(previous) && value !== ".") {
+					setCalc(calc + " " + value);
+				} else if (!isNaN(previous) && value === ".") {
+					setCalc(calc + value);
+				}
+			} else {
+				if (isNaN(previous) && previous !== ".") {
+					setCalc(calc + " " + value);
+				} else {
+					setCalc(calc + value);
+				}
+			}
+		} else if (!isNaN(value)) {
+			setCalc(calc + value);
+		}
 	}
 
-	function calculate() {
-		console.log("calc", calc);
-		let postFixArray = postFix(calc);
-		console.log(postFixArray);
-		console.log(eval(calc));
-		setResult(eval(calc));
-		setCalc(eval(calc));
+	function handleCalculate() {
+		try {
+			let newResult = calculate(calc);
+			console.log(newResult);
+			//console.log(eval(calc));
+			setResult(newResult);
+			setCalc(newResult);
+		} catch (error) {
+			console.log(error, "Ocorreu um erro");
+		}
 	}
 
 	function clear() {
@@ -26,8 +46,9 @@ export default function Calculator() {
 	}
 
 	function deleteLast() {
-		let lenght = calc.length;
-		let newCalc = calc.substring(0, lenght - 1);
+		let length = calc.length;
+		console.log(calc, typeof calc);
+		let newCalc = calc.slice(0, length - 1);
 		setCalc(newCalc);
 	}
 
@@ -44,7 +65,7 @@ export default function Calculator() {
 				<Button area="three" onClick={() => handleClick("3")}>
 					3
 				</Button>
-				<Button area="add" onClick={() => handleClick(" + ")}>
+				<Button area="add" onClick={() => handleClick("+")}>
 					+
 				</Button>
 				<Button area="four" onClick={() => handleClick("4")}>
@@ -56,7 +77,7 @@ export default function Calculator() {
 				<Button area="six" onClick={() => handleClick("6")}>
 					6
 				</Button>
-				<Button area="sub" onClick={() => handleClick(" - ")}>
+				<Button area="sub" onClick={() => handleClick("-")}>
 					-
 				</Button>
 				<Button area="seven" onClick={() => handleClick("7")}>
@@ -68,7 +89,7 @@ export default function Calculator() {
 				<Button area="nine" onClick={() => handleClick("9")}>
 					9
 				</Button>
-				<Button area="mul" onClick={() => handleClick(" * ")}>
+				<Button area="mul" onClick={() => handleClick("*")}>
 					*
 				</Button>
 				<Button area="zero" onClick={() => handleClick("0")}>
@@ -77,10 +98,10 @@ export default function Calculator() {
 				<Button area="dot" onClick={() => handleClick(".")}>
 					.
 				</Button>
-				<Button area="div" onClick={() => handleClick(" / ")}>
+				<Button area="div" onClick={() => handleClick("/")}>
 					/
 				</Button>
-				<RedButton area="calculate" onClick={() => calculate()}>
+				<RedButton area="calculate" onClick={() => handleCalculate()}>
 					=
 				</RedButton>
 				<BlueButton area="clear" onClick={() => clear()}>
