@@ -14,11 +14,7 @@ function postFix(inputString) {
 		} else {
 			if (operatorStack.length > 0) {
 				let previousOperator = operatorStack[operatorStack.length - 1];
-				if (precedence[value] === precedence[previousOperator]) {
-					let operator = operatorStack.pop();
-					output.push(operator);
-					operatorStack.push(value);
-				} else if (precedence[value] < precedence[previousOperator]) {
+				if (precedence[value] <= precedence[previousOperator]) {
 					let operator = operatorStack.pop();
 					output.push(operator);
 					operatorStack.push(value);
@@ -38,3 +34,5 @@ function postFix(inputString) {
 	}
 	return output;
 }
+
+export { postFix };
