@@ -1,35 +1,36 @@
-import { useState, useEffect } from "react";
-import { Button, BlueButton, RedButton } from "../Buttons";
+import { useState } from "react";
+import { Button, ClearButton, ResultButton } from "../Buttons";
 import Display from "../Display";
 import { GridLayout, Main } from "./styles";
 import { calculate } from "../../utils/parser";
 
 export default function Calculator() {
-	const [calc, setCalc] = useState("");
+	const [expression, setExpression] = useState("");
+	const [previousResult, setPreviousResult] = useState("");
 	const [error, setError] = useState(false);
 
 	function handleClick(value) {
-		console.log(calc);
+		console.log("expression", expression);
 		if (error) {
 			setError(false);
 		}
-		if (calc.length > 0) {
-			let previous = calc[calc.length - 1];
+		if (expression.length > 0) {
+			let previous = expression[expression.length - 1];
 			if (isNaN(value)) {
 				if (!isNaN(previous) && value !== ".") {
-					setCalc(calc + " " + value);
+					setExpression(expression + " " + value);
 				} else if (!isNaN(previous) && value === ".") {
-					setCalc(calc + value);
+					setExpression(expression + value);
 				}
 			} else {
 				if (isNaN(previous) && previous !== ".") {
-					setCalc(calc + " " + value);
+					setExpression(expression + " " + value);
 				} else {
-					setCalc(calc + value);
+					setExpression(expression + value);
 				}
 			}
 		} else if (!isNaN(value)) {
-			setCalc(calc + value);
+			setExpression(expression + value);
 		}
 	}
 
@@ -38,38 +39,38 @@ export default function Calculator() {
 			setError(false);
 		}
 		try {
-			let result = calculate(calc);
-			if (result === "Infinity") {
+			let result = calculate(expression);
+			result = String(result);
+			if (result === "Infinity" || isNaN(result)) {
 				setError(true);
 			} else {
-				result = Number(result);
-				result = parseFloat(result.toFixed(5));
-				setCalc(result);
+				setExpression(result);
+				setPreviousResult(result);
 			}
 		} catch (error) {
 			setError(true);
 		}
 	}
 
-	function clear() {
-		setCalc("");
+	function handleClear() {
+		setExpression("");
 		if (error) {
 			setError(false);
 		}
 	}
 
-	function deleteLast() {
+	function handleDelete() {
 		if (error) {
 			setError(false);
 		}
-		let length = calc.length;
-		let newCalc = calc.slice(0, length - 1);
-		setCalc(newCalc);
+		let length = expression.length;
+		let newCalc = expression.slice(0, length - 1);
+		setExpression(newCalc);
 	}
 
 	return (
 		<Main>
-			<Display>{error ? "Error" : calc}</Display>
+			<Display>{error ? "Error" : expression}</Display>
 			<GridLayout>
 				<Button area="one" onClick={() => handleClick("1")}>
 					1
@@ -116,15 +117,18 @@ export default function Calculator() {
 				<Button area="div" onClick={() => handleClick("/")}>
 					/
 				</Button>
-				<RedButton area="calculate" onClick={() => handleCalculate()}>
+				<ResultButton area="calculate" onClick={() => handleCalculate()}>
 					=
-				</RedButton>
-				<BlueButton area="clear" onClick={() => clear()}>
+				</ResultButton>
+				<ClearButton area="clear" onClick={() => handleClear()}>
 					C
-				</BlueButton>
-				<BlueButton area="delete" onClick={() => deleteLast()}>
+				</ClearButton>
+				<ClearButton area="delete" onClick={() => handleDelete()}>
 					Del
-				</BlueButton>
+				</ClearButton>
+				<ClearButton area="result" onClick={() => handleClick(previousResult)}>
+					Res
+				</ClearButton>
 			</GridLayout>
 		</Main>
 	);

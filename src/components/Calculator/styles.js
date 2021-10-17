@@ -7,11 +7,11 @@ export const GridLayout = styled.div`
 	grid-template-columns: repeat(4, 1fr);
 	grid-template-rows: repeat(5, 1fr);
 	grid-template-areas:
-		"one two three delete"
+		"one two three clear"
 		"four five six add"
 		"seven eight nine sub"
 		" dot zero  div mul"
-		"clear clear calculate calculate";
+		" delete result calculate calculate";
 	gap: 10px;
 	background-color: gray;
 	border: 5px gray solid;

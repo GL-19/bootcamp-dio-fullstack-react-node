@@ -12,12 +12,12 @@ export const Button = styled.button`
 	font-size: 25px;
 `;
 
-export const RedButton = styled(Button)`
+export const ResultButton = styled(Button)`
 	background-color: red;
 	color: white;
 `;
 
-export const BlueButton = styled(Button)`
+export const ClearButton = styled(Button)`
 	background-color: blueviolet;
 	color: white;
 `;

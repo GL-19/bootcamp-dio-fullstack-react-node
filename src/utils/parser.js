@@ -68,7 +68,7 @@ function postFixCalculation(input) {
 	if (stack.length > 1) {
 		throw new Error("Operadores faltando");
 	}
-	console.log(stack);
+	console.log("final postfix stack", stack);
 	const result = stack[0];
 	return result;
 }
@@ -76,7 +76,7 @@ function postFixCalculation(input) {
 function calculate(input) {
 	let postFixArray = postFixTransformation(input);
 	let result = postFixCalculation(postFixArray);
-	return String(result);
+	return parseFloat(result.toFixed(3));
 }
 
 export { postFixTransformation, postFixCalculation, calculate };
