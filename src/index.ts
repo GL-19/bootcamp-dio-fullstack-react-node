@@ -1,12 +1,18 @@
-import { Request, Response } from "express";
-import express from "express";
+import express, { Request, Response } from "express";
+import { URLController } from "./controller/URLController";
 
-const api = express();
-
+const app = express();
 const port = 3000;
 
-api.get("/test", (req: Request, res: Response) => {
-	res.status(200).send("Hello");
+app.use(express.json());
+
+app.get("/test", (req: Request, res: Response) => {
+	res.status(200).send("hello world");
 });
 
-api.listen(port, () => `App funcionando na porta ${port}`);
+const urlController = new URLController();
+
+app.post("/shorten", urlController.shorten);
+app.get("/:hash", urlController.redirect);
+
+app.listen(3000, () => console.log(`Servidor funcionando na porta 3000`));
