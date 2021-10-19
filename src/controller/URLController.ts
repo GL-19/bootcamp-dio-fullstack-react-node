@@ -13,23 +13,21 @@ export class URLController {
 		}
 
 		const hash = shortid.generate();
-		const shortURL = `${config.API_URL}/${hash}}`;
+		const shortURL = `${config.API_URL}/${hash}`;
 		const newURL = await URLModel.create({ hash, shortURL, originURL });
 
 		res.json(newURL);
 	}
 
 	public async redirect(req: Request, res: Response): Promise<void> {
-		//Pegar hash da url
 		const { hash } = req.params;
+		const url = await URLModel.findOne({ hash });
 
-		//Encontrar a url original pelo hash
-		const url = {
-			originURL: "https://github.com/GL-19",
-			hash: "o hash",
-			shortenURL: "url encurtada",
-		};
-		//Redirecionar para url original a partir do que foi encontrado no DB
-		res.redirect(url.originURL);
+		if (url) {
+			res.redirect(url.originURL);
+			return;
+		}
+
+		res.status(400).json({ error: "URL not found" });
 	}
 }
