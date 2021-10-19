@@ -10,13 +10,9 @@ app.use(express.json());
 const database = new MongoConnection();
 database.connect();
 
-app.get("/test", (req: Request, res: Response) => {
-	res.status(200).send("hello world");
-});
-
 const urlController = new URLController();
 
 app.post("/shorten", urlController.shorten);
 app.get("/:hash", urlController.redirect);
 
-app.listen(3000, () => console.log(`Servidor funcionando na porta 3000`));
+app.listen(port, () => console.log(`Servidor funcionando na porta ${port}`));
