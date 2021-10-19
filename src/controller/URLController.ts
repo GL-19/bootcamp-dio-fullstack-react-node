@@ -1,23 +1,22 @@
-//import { URLModel } from "../database/model/URL";
+import { URLModel } from "../database/model/URL";
 import { Request, Response } from "express";
 import shortid from "shortid";
 import { config } from "../config/Constants";
 
 export class URLController {
 	public async shorten(req: Request, res: Response): Promise<void> {
-		//Conferir se a url não existe
 		const { originURL } = req.body;
-		//const url = await URLModel.findOne({ originURL });
-		//Criar o hash da url a
+		const url = await URLModel.findOne({ originURL });
+		if (url) {
+			res.json(url);
+			return;
+		}
 
-		console.log(originURL);
 		const hash = shortid.generate();
 		const shortURL = `${config.API_URL}/${hash}}`;
+		const newURL = await URLModel.create({ hash, shortURL, originURL });
 
-		//Salvar a url no banco
-
-		//Retornar a url encurtada que foi salva
-		res.json({ originURL, hash, shortURL });
+		res.json(newURL);
 	}
 
 	public async redirect(req: Request, res: Response): Promise<void> {
