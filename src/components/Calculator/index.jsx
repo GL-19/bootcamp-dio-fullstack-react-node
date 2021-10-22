@@ -2,15 +2,14 @@ import { useState } from "react";
 import { Button, ClearButton, ResultButton } from "../Buttons";
 import Display from "../Display";
 import { GridLayout, Main } from "./styles";
-import { calculate } from "../../utils/parser";
+import { calculate } from "../../utils/calculations";
 
 export default function Calculator() {
 	const [expression, setExpression] = useState("");
-	const [previousResult, setPreviousResult] = useState("");
+	const [result, setResult] = useState("");
 	const [error, setError] = useState(false);
 
 	function handleClick(value) {
-		console.log("expression", expression);
 		if (error) {
 			setError(false);
 		}
@@ -34,18 +33,19 @@ export default function Calculator() {
 		}
 	}
 
+	//A string de cálculo deve ter 1 espaço entre cada número/operador
 	function handleCalculate() {
 		if (error) {
 			setError(false);
 		}
 		try {
-			let result = calculate(expression);
-			result = String(result);
-			if (result === "Infinity" || isNaN(result)) {
+			let newResult = calculate(expression);
+			newResult = String(newResult);
+			if (newResult === "Infinity" || isNaN(newResult)) {
 				setError(true);
 			} else {
-				setExpression(result);
-				setPreviousResult(result);
+				setExpression(newResult);
+				setResult(newResult);
 			}
 		} catch (error) {
 			setError(true);
@@ -64,8 +64,8 @@ export default function Calculator() {
 			setError(false);
 		}
 		let length = expression.length;
-		let newCalc = expression.slice(0, length - 1);
-		setExpression(newCalc);
+		let newExpression = expression.slice(0, length - 1);
+		setExpression(newExpression);
 	}
 
 	return (
@@ -126,7 +126,7 @@ export default function Calculator() {
 				<ClearButton area="delete" onClick={() => handleDelete()}>
 					Del
 				</ClearButton>
-				<ClearButton area="result" onClick={() => handleClick(previousResult)}>
+				<ClearButton area="result" onClick={() => handleClick(result)}>
 					Res
 				</ClearButton>
 			</GridLayout>

@@ -1,42 +1,35 @@
-function postFixTransformation(inputString) {
+function infixToPostfix(inputString) {
 	let input = inputString.split(" ");
-	console.log(input);
 	const precedence = {
 		"+": 1,
 		"-": 1,
 		"*": 2,
 		"/": 2,
 	};
-	const output = [];
+	const postfixExpression = [];
 	const operatorStack = [];
 	for (const value of input) {
 		if (!isNaN(value)) {
-			output.push(value);
+			postfixExpression.push(value);
 		} else {
-			if (operatorStack.length > 0) {
-				let previousOperator = operatorStack[operatorStack.length - 1];
-				if (precedence[value] <= precedence[previousOperator]) {
-					let operator = operatorStack.pop();
-					output.push(operator);
-					operatorStack.push(value);
-				} else {
-					operatorStack.push(value);
-				}
-			} else {
-				operatorStack.push(value);
+			while (
+				operatorStack.length > 0 &&
+				precedence[value] <= precedence[operatorStack[operatorStack.length - 1]]
+			) {
+				postfixExpression.push(operatorStack.pop());
 			}
+			operatorStack.push(value);
 		}
-		console.log("output", output);
-		console.log("operator", operatorStack);
 	}
 	while (operatorStack.length > 0) {
 		let operator = operatorStack.pop();
-		output.push(operator);
+		postfixExpression.push(operator);
 	}
-	return output;
+
+	return postfixExpression;
 }
 
-function postFixCalculation(input) {
+function calculatePostfix(input) {
 	const stack = [];
 	for (let value of input) {
 		if (!isNaN(value)) {
@@ -58,7 +51,6 @@ function postFixCalculation(input) {
 					stack.push(num1 * num2);
 					break;
 				default:
-					console.log("Operador inválido");
 					break;
 			}
 		} else if (stack.length < 2) {
@@ -68,15 +60,14 @@ function postFixCalculation(input) {
 	if (stack.length > 1) {
 		throw new Error("Operadores faltando");
 	}
-	console.log("final postfix stack", stack);
 	const result = stack[0];
 	return result;
 }
 
 function calculate(input) {
-	let postFixArray = postFixTransformation(input);
-	let result = postFixCalculation(postFixArray);
+	let postFixArray = infixToPostfix(input);
+	let result = calculatePostfix(postFixArray);
 	return parseFloat(result.toFixed(3));
 }
 
-export { postFixTransformation, postFixCalculation, calculate };
+export { infixToPostfix, calculatePostfix, calculate };
