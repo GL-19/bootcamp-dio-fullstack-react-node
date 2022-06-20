@@ -23,11 +23,15 @@ export default function SearchResult() {
 		if (localStorage.getItem("user")) {
 			let repositories = localStorage.getItem("repositories");
 			let user = localStorage.getItem("user");
+
 			repositories = JSON.parse(repositories);
+
 			user = JSON.parse(user);
+
 			setRepos(repositories);
 			setUser(user);
 			setSearchValue(user?.login);
+
 			localStorage.clear();
 		} else if (!failedSearch) {
 			history.push("/");
@@ -71,9 +75,11 @@ export default function SearchResult() {
 					type="text"
 					value={searchValue}
 					onChange={(e) => setSearchValue(e.target.value)}
-          onKeyPress={handleKeyPress}
+					onKeyPress={handleKeyPress}
 				/>
-				<Button type="submit" onClick={handleSearch}>Pesquisar</Button>
+				<Button type="submit" onClick={handleSearch}>
+					Pesquisar
+				</Button>
 			</SearchWrapper>
 			{failedSearch && <Warning>Usuário não encontrado</Warning>}
 			{user.login && <Profile userData={user} />}

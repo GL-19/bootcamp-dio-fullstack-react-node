@@ -26,7 +26,6 @@ export default function Profile(props) {
 		email,
 		blog,
 		twitter_username: twitter,
-		public_repos: repos,
 	} = props.userData;
 
 	return (
