@@ -36,7 +36,7 @@ export default function SearchResult() {
 		} else if (!failedSearch) {
 			history.push("/");
 		}
-	}, []);
+	}, [failedSearch, history]);
 
 	function handleSearch() {
 		getRepos(searchValue)
