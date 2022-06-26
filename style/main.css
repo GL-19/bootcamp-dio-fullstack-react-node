@@ -1,0 +1,123 @@
+:root {
+    --red: #E50914;
+    --black: #141414;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--black);
+    font-family: 'Times New Roman', Times, serif;
+    color: white;
+}
+
+.container {
+    margin-left: 35px;
+    margin-right: 15px;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    color: var(--red);
+    font-family: 'Arial Black', Times;
+    font-size: 40px;
+    margin-left: 5px;
+}
+
+header nav a {
+    text-decoration: none;
+    margin-right: 10px;
+    color: #AAA;
+}
+
+header nav a:hover {
+    color: #ffffff;
+}
+
+/*Filme em destaque*/
+.serie-destaque {
+    font-size: 16px;
+    background-image: url('../img/capa-house-of-cards.jpg'), linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));
+    height: 400px;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.serie-destaque .descricao {
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+.serie-destaque .titulo {
+    margin-top: 15%;
+    font-size: 40px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.serie-destaque .container {
+    max-width: 60%;
+}
+
+.botao {
+    background-color: rgba(0,0,0,0.5);
+    border: none;
+    padding: 15px 30px;
+    margin-right: 10px;
+    font-size: 12px;
+    color: white;
+    cursor: pointer;
+    transition: 0.33s ease;
+}
+
+.botao:hover {
+    background-color: white;
+    color: black;
+}
+
+.botao i {
+    margin-right: 7.5px;
+}
+
+.serie {
+    width: 80%;
+    height: 80%;
+    display: block;
+}
+
+.serie:hover {
+    width: 100%;
+    height: 100%;
+}
+
+.carrosel-series {
+    margin-top: 5px;
+}
+
+@media screen and (max-width: 700px) {
+    header .container {
+        flex-direction: column;
+    }
+
+    .botao {
+        margin-top: 5px;
+        width: 300px;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .serie-destaque .descricao {
+        width: 50%;
+    }
+}
